@@ -1,0 +1,37 @@
+<h1>
+  {{model.title}}
+</h1>
+
+<div>
+  <input type="text" #todoText style="width:300px;">
+  <!-- Add item -->
+  <button (click)= "addItem(todoText.value) ; todoText.value ='';" > ADD </button>
+</div>
+
+<div>
+  <input type ="checkbox" [(ngModel)]="isDisplay" name="" id="displayAll">
+  <label for ="displayAll">Display All</label>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <td></td>
+      <td>Description</td>
+      <td>Action</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of getItems() ; let i= index">
+      <td> {{i+1}} </td>
+      <td> {{ item.description }} </td>
+      <!-- ngModule for binding with two way -->
+      <td>
+        <input type ="checkbox" [(ngModel)]="item.action"></td>
+      <td [ngSwitch]="item.action">
+        <span *ngSwitchCase="true"> Yes </span>
+        <span *ngSwitchCase="false"> No </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
